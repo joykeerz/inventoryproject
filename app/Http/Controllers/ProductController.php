@@ -61,7 +61,7 @@ class ProductController extends Controller
         ->select('products.*','types.typename','categories.Categoryname')
         ->where('types.typename','=','banking')
         ->get();
-        return view('products/data',['products'=>$ProductsJoin, 'type' => '3']);
+        return view('Products.data',['products'=>$ProductsJoin, 'type' => '3']);
     }
 
     public function dataElectronicList(){
@@ -71,7 +71,7 @@ class ProductController extends Controller
         ->select('products.*','types.typename','categories.Categoryname')
         ->where('types.typename','=','electronic')
         ->get();
-        return view('products.data',['products'=>$ProductsJoin, 'type' => '4']);
+        return view('Products.data',['products'=>$ProductsJoin, 'type' => '4']);
     }
 
     public function editBanking($id){
@@ -80,7 +80,7 @@ class ProductController extends Controller
         if (!$products) {
             dd('not found');
         }
-        return view('products.edit',['products'=>$products, 'value'=>$categories, 'type' => '3']);
+        return view('Products.edit',['products'=>$products, 'value'=>$categories, 'type' => '3']);
     }
 
     public function updateBanking(Request $request, $id){
