@@ -61,7 +61,7 @@ class ProductController extends Controller
         ->select('products.*','types.typename','categories.Categoryname')
         ->where('types.typename','=','banking')
         ->get();
-        return view('products.data',['products'=>$ProductsJoin, 'type' => '3']);
+        return view('products/data',['products'=>$ProductsJoin, 'type' => '3']);
     }
 
     public function dataElectronicList(){
