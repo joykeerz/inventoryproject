@@ -75,7 +75,7 @@ class SubdataController extends Controller
     {
         $categories = new categories;
         $categories->types_id = $request->type_id;
-        $categories->categoryname = $request->name;
+        $categories->Categoryname = $request->name;
         $categories->save();
         return redirect('categories')->with('success','Successfully added');
     }
