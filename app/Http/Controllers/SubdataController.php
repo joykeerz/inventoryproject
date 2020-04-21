@@ -29,7 +29,7 @@ class SubdataController extends Controller
         $type = new types;
         $type->typename = $request->name;
         $type->save();
-        return redirect('Types')->with('success','Successfully added');
+        return redirect('types')->with('success','Successfully added');
     }
 
     public function edit($id)
@@ -46,14 +46,14 @@ class SubdataController extends Controller
         $type = types::find($id);
         $type->typename = $request->name;
         $type->save();
-        return redirect('Types')->with('success','Successfully added');
+        return redirect('types')->with('success','Successfully added');
     }
 
     public function delete($id)
     {
         $type = categories::find($id);
         $type->delete();
-        redirect('Types')->with('success','Successfully Deleted');
+        redirect('types')->with('success','Successfully Deleted');
     }
 
     public function indexCategories()
