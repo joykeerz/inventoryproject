@@ -15,7 +15,7 @@ class CreateSparepartsTable extends Migration
     {
         Schema::create('spareparts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('types_id');
+            $table->unsignedBigInteger('categories_id');
             $table->integer('productNumber');
             $table->integer('serialNumber');
             $table->string('location');

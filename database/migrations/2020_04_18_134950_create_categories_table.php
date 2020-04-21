@@ -15,7 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBsigInteger('types_id');
+            $table->unsignedBigInteger('types_id');
             $table->string('Categoryname');
             $table->timestamps();
             ///relation
