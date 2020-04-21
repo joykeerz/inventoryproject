@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/back', 'HomeController@back')->name('back');
 
 ///Products Route
 Route::get('/products', 'ProductController@index')->name('mainProducts');
@@ -39,5 +40,22 @@ Route::get('/products/electronic', 'ProductController@dataElectronicList')->name
 Route::get('/products/electronic/add', 'ProductController@addElectronic')->name('AddElectronic');
 Route::post('/products/electronic/add', 'ProductController@createElectronic')->name('CreateElectronic');
 Route::delete('/products/electronic/{id}', 'ProductController@deleteElectronic')->name('DeleteElectronic');
+
 ///Spareparats Route
 Route::get('/spareparts', 'SparepartController@index')->name('mainSparepart');
+
+///Subdata Route
+//categories
+Route::get('/categories', 'SubdataController@index')->name('Categories');
+Route::get('/categories/add', 'SubdataController@create')->name('AddCategories');
+Route::post('/categories/add', 'SubdataController@store')->name('CreateCategories');
+Route::get('/categories/{id}/edit', 'SubdataController@edit')->name('EditCategories');
+Route::put('/categories/{id}/', 'SubdataController@update')->name('UpdateCategories');
+Route::delete('/categories/{id}', 'SubdataController@delete')->name('DeleteCategories');
+//types
+Route::get('/types', 'SubdataController@index')->name('Types');
+Route::get('/types/add', 'SubdataController@create')->name('AddTypes');
+Route::post('/types/add', 'SubdataController@store')->name('CreateTypes');
+Route::get('/types/{id}/edit', 'SubdataController@edit')->name('EditTypes');
+Route::put('/types/{id}/', 'SubdataController@update')->name('UpdateTypes');
+Route::delete('/types/{id}', 'SubdataController@delete')->name('DeleteTypes');
