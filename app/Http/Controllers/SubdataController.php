@@ -51,8 +51,59 @@ class SubdataController extends Controller
 
     public function delete($id)
     {
-        $type = types::find($id);
+        $type = categories::find($id);
         $type->delete();
         redirect('Types')->with('success','Successfully Deleted');
+    }
+
+    public function indexCategories()
+    {
+        $categories = DB::table('categories')
+        ->join('types','categories.types_id','=','types.id')
+        ->select('categories.*','types.typename')
+        ->get();
+        return view('categories.main', ['categories' => $categories]);
+    }
+
+    public function createCategories()
+    {
+        $types = DB::table('types')->get();
+        return view('categories.create',['types'=> $types]);
+    }
+
+    public function storeCategories(Request $request)
+    {
+        $categories = new categories;
+        $categories->types_id = $request->type_id;
+        $categories->categoryname = $request->name;
+        $categories->save();
+        return redirect('categories')->with('success','Successfully added');
+    }
+
+    public function editCategories($id)
+    {
+        $categories = categories::find($id);
+        $typeFind = types::find($categories->types_id);
+        $types = DB::table('types')->get();
+        if (!$types) {
+            dd('notfound');
+        }
+        return view('categories.edit',['categories'=>$categories, 'types'=>$types, 'typeFind'=>$typeFind ]);
+    }
+
+    public function updateCategories(Request $request, $id)
+    {
+        $categories = categories::find($id);
+        $categories->types_id = $request->type_id;
+        $categories->categoryname = $request->name;
+        $categories->save();
+        return redirect('categories')->with('success','Successfully added');
+    }
+
+    public function deleteCategories($id)
+    {
+        $categories = categories::find($id);
+        $categories->delete();
+        return redirect('categories')->with('success','Successfully Deleted');
     }
 }

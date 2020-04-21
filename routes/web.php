@@ -46,12 +46,12 @@ Route::get('/spareparts', 'SparepartController@index')->name('mainSparepart');
 
 ///Subdata Route
 //categories
-Route::get('/categories', 'SubdataController@index')->name('Categories');
-Route::get('/categories/add', 'SubdataController@create')->name('AddCategories');
-Route::post('/categories/add', 'SubdataController@store')->name('CreateCategories');
-Route::get('/categories/{id}/edit', 'SubdataController@edit')->name('EditCategories');
-Route::put('/categories/{id}/', 'SubdataController@update')->name('UpdateCategories');
-Route::delete('/categories/{id}', 'SubdataController@delete')->name('DeleteCategories');
+Route::get('/categories', 'SubdataController@indexCategories')->name('Categories');
+Route::get('/categories/add', 'SubdataController@createCategories')->name('AddCategories');
+Route::post('/categories/add', 'SubdataController@storeCategories')->name('CreateCategories');
+Route::get('/categories/{id}/edit', 'SubdataController@editCategories')->name('EditCategories');
+Route::put('/categories/{id}/', 'SubdataController@updateCategories')->name('UpdateCategories');
+Route::delete('/categories/{id}', 'SubdataController@deleteCategories')->name('DeleteCategories');
 //types
 Route::get('/types', 'SubdataController@index')->name('Types');
 Route::get('/types/add', 'SubdataController@create')->name('AddTypes');

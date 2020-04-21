@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-Admin Dashboard | Products
+Admin Dashboard | Add Category
 @endsection
 
 @section('user')
@@ -15,60 +15,35 @@ Admin Dashboard | Products
 @endsection
 
 @section('content')
-<h4 class="card-title mt-5">Edit Banking Product</h4>
+<h4 class="card-title mt-5">Add Category</h4>
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-6">
         <div class="card">
-            <form action="
-            @if ($type == '3')
-            {{ route('UpdateBanking',['id'=>$products->id]) }}
-            @else
-            {{ route('CreateElectronic') }}
-            @endif
-            " method="post">
+            <form action="{{ route('UpdateCategories',['id'=>$categories->id]) }}" method="post">
                 <div class="card-body">
-                    <h4 class="card-title">Product Number</h4>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="product_id" value="{{$products->id}}">
-                        <input type="text" class="form-control" name="number" value="{{$products->productNumber}}">
-                    </div>
 
-                    <h4 class="card-title">Serial Number</h4>
+                    <h4 class="card-title">Category name</h4>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="serial" value="{{$products->serialNumber}}">
-                    </div>
-
-                    <h4 class="card-title">Location</h4>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="location" value="{{$products->location}}">
-                    </div>
-
-                    <h4 class="card-title">Status</h4>
-                    <div class="form-group mb-4">
-                        <label for="exampleFormControlSelect1">Select Product Satus</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="status">
-                            <option disabled>--{{$products->status}}--</option>
-                            <option>New</option>
-                            <option>Used</option>
-                        </select>
+                    <input type="text" class="form-control" name="name" value="{{$categories->Categoryname}}">
                     </div>
 
                     <h4 class="card-title">Category</h4>
                     <div class="form-group mb-4">
-                        <label for="exampleFormControlSelect1">Select Product Category</label>
+                        <label for="exampleFormControlSelect1">Select Product type</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="category">
-                            <option disabled >--{{$products->status}}--</option>
-                            @foreach($value as $item)
-                                <option value="{{ $item->id }}" label="">{{ $item->Categoryname }}</option>
+                            <option disabled value="{{ $typeFind->id }}" label="">--{{ $typeFind->typename }}--</option>
+                            @foreach($types as $item)
+                                <option value="{{ $item->id }}" label="">{{ $item->typename }}</option>
                             @endforeach
                         </select>
                     </div>
+
                     <button class="btn btn-labeled btn-primary float-right mt-3" type="submit">
                         <input type="hidden" name="_method" value="PUT">
                         <span class="btn-label">
                             <i class="fa fa-check"></i>
                         </span>
-                        Done
+                        Add
                         @csrf
                     </button>
                 </div>
