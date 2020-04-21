@@ -51,7 +51,7 @@ class SubdataController extends Controller
 
     public function delete($id)
     {
-        $type = categories::find($id);
+        $type = types::find($id);
         $type->delete();
         redirect('types')->with('success','Successfully Deleted');
     }
