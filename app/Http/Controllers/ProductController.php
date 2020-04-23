@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\products;
+use App\types;
 use DB;
 class ProductController extends Controller
 {
@@ -20,13 +21,15 @@ class ProductController extends Controller
 
     public function addBanking()
     {
-        $categories = DB::table('categories')->where('types_id','=','3')->get();
+        $type = types::firstWhere('typename','banking');
+        $categories = DB::table('categories')->where('types_id','=',$type->id)->get();
         return view('Products.create',['value'=>$categories, 'type' => '3']);
     }
 
     public function addElectronic()
     {
-        $categories = DB::table('categories')->where('types_id','=','4')->get();
+        $type = types::firstWhere('typename','electronic');
+        $categories = DB::table('categories')->where('types_id','=',$type->id)->get();
         return view('Products.create',['value'=>$categories, 'type' => '4']);
     }
 
