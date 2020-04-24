@@ -28,6 +28,7 @@ Route::get('/back', 'HomeController@back')->name('back');
 
 ///Products Route
 Route::get('/products', 'ProductController@index')->name('mainProducts');
+
 //banking
 Route::get('/products/banking', 'ProductController@dataBankingList')->name('BankingProducts');
 Route::get('/products/banking/add', 'ProductController@addBanking')->name('AddBanking');
@@ -35,6 +36,7 @@ Route::post('/products/banking/add', 'ProductController@createBanking')->name('C
 Route::get('/products/banking/{id}/edit', 'ProductController@editBanking')->name('EditBanking');
 Route::put('/products/banking/{id}/', 'ProductController@updateBanking')->name('UpdateBanking');
 Route::delete('/products/banking/{id}', 'ProductController@deleteBanking')->name('DeleteBanking');
+
 //electronic
 Route::get('/products/electronic', 'ProductController@dataElectronicList')->name('ElectronicProducts');
 Route::get('/products/electronic/add', 'ProductController@addElectronic')->name('AddElectronic');
@@ -45,6 +47,7 @@ Route::delete('/products/electronic/{id}', 'ProductController@deleteElectronic')
 Route::get('/spareparts', 'SparepartController@index')->name('mainSparepart');
 
 ///Subdata Route
+
 //categories
 Route::get('/categories', 'SubdataController@indexCategories')->name('Categories');
 Route::get('/categories/add', 'SubdataController@createCategories')->name('AddCategories');
@@ -52,6 +55,7 @@ Route::post('/categories/add', 'SubdataController@storeCategories')->name('Creat
 Route::get('/categories/{id}/edit', 'SubdataController@editCategories')->name('EditCategories');
 Route::put('/categories/{id}/', 'SubdataController@updateCategories')->name('UpdateCategories');
 Route::delete('/categories/{id}', 'SubdataController@deleteCategories')->name('DeleteCategories');
+
 //types
 Route::get('/types', 'SubdataController@index')->name('Types');
 Route::get('/types/add', 'SubdataController@create')->name('AddTypes');
