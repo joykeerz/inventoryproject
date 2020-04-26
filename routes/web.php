@@ -31,6 +31,8 @@ Route::get('/products', 'ProductController@index')->name('mainProducts');
 
 //banking
 Route::get('/products/banking', 'ProductController@dataBankingList')->name('BankingProducts');
+Route::post('/products/banking/filter', 'ProductController@filterDataBanking')->name('DataFilterBanking');
+
 Route::get('/products/banking/add', 'ProductController@addBanking')->name('AddBanking');
 Route::post('/products/banking/add', 'ProductController@createBanking')->name('CreateBanking');
 Route::get('/products/banking/{id}/edit', 'ProductController@editBanking')->name('EditBanking');
@@ -39,6 +41,8 @@ Route::delete('/products/banking/{id}', 'ProductController@deleteBanking')->name
 
 //electronic
 Route::get('/products/electronic', 'ProductController@dataElectronicList')->name('ElectronicProducts');
+Route::post('/products/electronic/filter', 'ProductController@filterDataElectronic')->name('DataFilterElectronic');
+
 Route::get('/products/electronic/add', 'ProductController@addElectronic')->name('AddElectronic');
 Route::post('/products/electronic/add', 'ProductController@createElectronic')->name('CreateElectronic');
 Route::delete('/products/electronic/{id}', 'ProductController@deleteElectronic')->name('DeleteElectronic');

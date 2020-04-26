@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\categories;
 use Illuminate\Http\Request;
 use App\products;
 use App\types;
@@ -32,6 +33,7 @@ class ProductController extends Controller
         $categories = DB::table('categories')->where('types_id','=',$type->id)->get();
         return view('Products.create',['value'=>$categories, 'type' => '4']);
     }
+
 
     public function createBanking(Request $request)
     {
@@ -64,7 +66,14 @@ class ProductController extends Controller
         ->select('products.*','types.typename','categories.Categoryname')
         ->where('types.typename','=','banking')
         ->get();
-        return view('Products.data',['products'=>$ProductsJoin, 'type' => '3']);
+
+        $checkbox = DB::table('categories')
+        ->join('types','categories.types_id','types.id')
+        ->where('typename','banking')
+        ->select('categories.*','types.typename')
+        ->get();
+
+        return view('Products.data',['products'=>$ProductsJoin, 'type' => '3', 'checkbox'=>$checkbox, 'isFiltered'=>false]);
     }
 
     public function dataElectronicList(){
@@ -74,7 +83,14 @@ class ProductController extends Controller
         ->select('products.*','types.typename','categories.Categoryname')
         ->where('types.typename','=','electronic')
         ->get();
-        return view('Products.data',['products'=>$ProductsJoin, 'type' => '4']);
+
+        $checkbox = DB::table('categories')
+        ->join('types','categories.types_id','types.id')
+        ->where('typename','electronic')
+        ->select('categories.*','types.typename')
+        ->get();
+
+        return view('Products.data',['products'=>$ProductsJoin, 'type' => '4', 'checkbox'=>$checkbox, 'isFiltered'=>false]);
     }
 
     public function editBanking($id){
@@ -120,6 +136,50 @@ class ProductController extends Controller
         $product = products::find($id);
         $product->delete();
         return redirect()->route('ElectronicProducts')->with('success','Deleted Successfuly');
+    }
+
+    public function filterDataBanking(Request $request)
+    {
+        $request->validate([
+            'cat[]' => 'required',
+        ]);
+
+        $ProductsJoin = DB::table('products')
+        ->join('categories','products.categories_id','=','categories.id')
+        ->join('types','categories.types_id','=','types.id')
+        ->select('products.*','types.typename','categories.Categoryname')
+        ->whereIn('categories.id',$request->cat)
+        ->get();
+
+        $checkbox = DB::table('categories')
+        ->join('types','categories.types_id','types.id')
+        ->where('typename','banking')
+        ->select('categories.*','types.typename')
+        ->get();
+        return view('Products.data',['products'=>$ProductsJoin, 'type' => '3', 'checkbox'=>$checkbox, 'isFiltered'=>$request->cat]);
+        // $products = products::whereIn('categories_id',$request->cat)->get();
+    }
+
+    public function filterDataElectronic(Request $request)
+    {
+        $request->validate([
+            'cat[]' => 'required',
+        ]);
+
+        $ProductsJoin = DB::table('products')
+        ->join('categories','products.categories_id','=','categories.id')
+        ->join('types','categories.types_id','=','types.id')
+        ->select('products.*','types.typename','categories.Categoryname')
+        ->whereIn('categories.id',$request->cat)
+        ->get();
+
+        $checkbox = DB::table('categories')
+        ->join('types','categories.types_id','types.id')
+        ->where('typename','electronic')
+        ->select('categories.*','types.typename')
+        ->get();
+        return view('Products.data',['products'=>$ProductsJoin, 'type' => '4', 'checkbox'=>$checkbox, 'isFiltered'=>$request->cat]);
+        // $products = products::whereIn('categories_id',$request->cat)->get();
     }
 
 }

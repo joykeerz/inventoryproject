@@ -28,7 +28,10 @@ class HomeController extends Controller
     {
         $TotalProducts = DB::table('products')->get()->count();
         $TotalSpareparts = DB::table('spareparts')->get()->count();
-        return view('admin.index',['TotalProducts'=>$TotalProducts, 'TotalSpareparts'=>$TotalSpareparts]);
+        return view('admin.index',[
+            'TotalProducts'=>$TotalProducts,
+            'TotalSpareparts'=>$TotalSpareparts
+        ]);
     }
 
     public function back()

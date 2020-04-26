@@ -23,10 +23,17 @@ Admin Dashboard | Products
         <strong>Success - </strong> {{ session()->get('success') }}
     </div>
 @endif
+@error('cat[]')
+    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
+        role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Error - </strong> Please atleast check one box
+    </div>
+@enderror
 
 <div class="card col-md-3 bg-dark text-white">
-
-
 
         @if ($type == '3')
             <a href="{{ route('AddBanking') }}">
@@ -50,8 +57,29 @@ Admin Dashboard | Products
 </div>
 
 <div class="card text-dark bg-white">
-    <div class="card-header">
-        <h4 class="mb-0 text-dark">{{$type == 3 ? 'Banking Data' : 'Electronic Data'}}</h4>
+    <div class="card-header d-flex flex-lg-row justify-content-between flex-sm-column">
+        <h4 class="mb-1 text-dark">{{$type == 3 ? 'Banking Data' : 'Electronic Data'}}</h4>
+        <form method="post" action="{{ $type == 3 ? route('DataFilterBanking'): route('DataFilterElectronic')}}" class="d-flex justify-content-between">
+
+            @csrf
+        @foreach ($checkbox as $item)
+        <div class="form-check">
+            <label class="form-check-label mr-2">
+            <input type="checkbox" name="cat[]" class="form-check-input @error('cat[]') is-invalid @enderror" value="{{$item->id}}"
+            @if ($isFiltered)
+                @foreach ($isFiltered as $f)
+                    @if ($f == $item->id)
+                        checked
+                    @endif
+                @endforeach
+            @endif
+            >
+                {{$item->Categoryname}}
+            </label>
+        </div>
+        @endforeach
+        <button type="submit" class="btn btn-primary ml-2"> Submit </button>
+        </form>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -93,7 +121,9 @@ Admin Dashboard | Products
                             {{ route('DeleteElectronic', ['id'=>$item->id]) }}
                             @endif
                             " method="POST">
-                                <input type="submit" name="submit" value="" class="btn btn-danger btn-circle">
+                                <button type="submit" name="submit" value="" class="btn btn-danger btn-circle">
+                                    <span class="icon-trash"></span>
+                                </button>
                             @csrf
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
@@ -117,6 +147,8 @@ Admin Dashboard | Products
         </div>
     </div>
 </div>
+<script>
+</script>
 @endsection
 
 @section('plugins')
