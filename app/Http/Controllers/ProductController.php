@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\products;
 use App\types;
 use DB;
+use Illuminate\Support\Facades\Redirect;
+
 class ProductController extends Controller
 {
     //
@@ -140,10 +142,13 @@ class ProductController extends Controller
 
     public function filterDataBanking(Request $request)
     {
-        $request->validate([
-            'cat[]' => 'required',
-        ]);
+        // $request->validate([
+        //     'cat[]' => 'required|min:1',
+        // ]);
 
+        if ($request->cat < 1) {
+            return redirect()->back()->with('msg','select atleast one checkbox');
+        }
         $ProductsJoin = DB::table('products')
         ->join('categories','products.categories_id','=','categories.id')
         ->join('types','categories.types_id','=','types.id')
@@ -162,9 +167,13 @@ class ProductController extends Controller
 
     public function filterDataElectronic(Request $request)
     {
-        $request->validate([
-            'cat[]' => 'required',
-        ]);
+        // $request->validate([
+        //     'cat[]' => 'required|min:1',
+        // ]);
+
+        if ($request->cat < 1) {
+            return redirect()->back()->with('msg','select atleast one checkbox');
+        }
 
         $ProductsJoin = DB::table('products')
         ->join('categories','products.categories_id','=','categories.id')

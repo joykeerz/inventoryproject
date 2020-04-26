@@ -23,6 +23,15 @@ Admin Dashboard | Products
         <strong>Success - </strong> {{ session()->get('success') }}
     </div>
 @endif
+@if (session()->has('msg'))
+    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
+        role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Success - </strong> {{ session()->get('msg') }}
+    </div>
+@endif
 @error('cat[]')
     <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
         role="alert">

@@ -31,7 +31,7 @@ Route::get('/products', 'ProductController@index')->name('mainProducts');
 
 //banking
 Route::get('/products/banking', 'ProductController@dataBankingList')->name('BankingProducts');
-Route::post('/products/banking/filter', 'ProductController@filterDataBanking')->name('DataFilterBanking');
+Route::post('/products/banking', 'ProductController@filterDataBanking')->name('DataFilterBanking');
 
 Route::get('/products/banking/add', 'ProductController@addBanking')->name('AddBanking');
 Route::post('/products/banking/add', 'ProductController@createBanking')->name('CreateBanking');
